@@ -1,8 +1,17 @@
-{
-  "title": "Football kits and meaning",
-  "date": "2025-08-10",
-  "slug": "
-This is my first post. I woke up at 6.20am this morning and I'm clambering on to any grip of productivity I have access to as a student with £5 of overdraft and a no concept of future planning. 
-",
-  "summary": "Exploring symbolism and social statements in shirt design."
-}
+## Football Kits: Symbols in Stitch
+
+From 70s anti-fascist stripes to modern sponsorship saturation, football shirts reflect more than team pride. They tell stories—cultural, commercial, and personal.
+
+### 🧵 Threads with meaning
+
+Whether it’s the classic Juventus black-and-white or Nigeria’s 2018 pattern frenzy, designs have sparked debates around class, politics, and even queer visibility.
+
+> “The shirt isn't just a uniform—it's an identity.”
+
+### 👟 Fans and fashion
+
+Supporters wear kits like social statements. That away strip at a wedding? That’s tribal. And maybe... a little rebellious.
+
+### ⚽ Wrap-up
+
+This season, maybe the shirts speak louder than chants. Look closely—you’ll see history stitched between the seams.
