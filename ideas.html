@@ -1,0 +1,39 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Ideas — Rocco Craven</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html">Rocco Craven</a>
+    <nav>
+      <a href="blog.html">Blog</a>
+      <a href="games/tictactoe.html">Tic-Tac-Toe</a>
+      <a href="games/snake.html">Snake</a>
+      <a class="active" href="ideas.html">Ideas</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h1>Ideas</h1>
+    <p>Notes-in-progress. Rough on purpose.</p>
+    <ul class="idea-list" id="ideas"></ul>
+  </main>
+
+  <footer class="site-footer"><small>© <span id="year"></span> Rocco Craven</small></footer>
+
+  <script src="assets/js/utils.js"></script>
+  <script>
+    const ideas = [
+      { title: "Language micro-drills", note: "30-second pronunciation loops with spaced repetition." },
+      { title: "Kit design as rhetoric", note: "What football kits say about identity and power." },
+      { title: "Micro-games playlist", note: "Tiny browser games that teach one mechanic well." }
+    ];
+    const list = document.getElementById('ideas');
+    list.innerHTML = ideas.map(i => `<li><h3>${i.title}</h3><p>${i.note}</p></li>`).join('');
+  </script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Tic-Tac-Toe — Rocco</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    .board { display: grid; grid-template-columns: repeat(3, 100px); gap: 6px; margin: 20px 0; }
+    .cell { width: 100px; height: 100px; display: grid; place-items: center; font-size: 2.2rem;
+      background: var(--card); border: 1px solid var(--border); border-radius: 8px; cursor: pointer; }
+    .status { margin-top: 10px; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="../index.html">Rocco Craven</a>
+    <nav>
+      <a href="../blog.html">Blog</a>
+      <a class="active" href="#">Tic-Tac-Toe</a>
+      <a href="snake.html">Snake</a>
+    </nav>
+  </header>
+  <main class="container">
+    <h1>Tic-Tac-Toe</h1>
+    <div class="board" id="board"></div>
+    <button id="reset" class="cta">Reset</button>
+    <p class="status" id="status"></p>
+  </main>
+  <script>
+    const boardEl = document.getElementById('board');
+    const statusEl = document.getElementById('status');
+    const resetEl = document.getElementById('reset');
+    let board = Array(9).fill(null);
+    let xTurn = true;
+    const wins = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+    function render(){
+      boardEl.innerHTML = '';
+      board.forEach((v,i)=>{
+        const b = document.createElement('button');
+        b.className = 'cell';
+        b.textContent = v ?? '';
+        b.disabled = v || winner(board);
+        b.addEventListener('click', ()=>move(i));
+        boardEl.appendChild(b);
+      });
+      statusEl.textContent = winner(board) ? `Winner: ${winner(board)}` : board.every(Boolean) ? 'Draw' : `Turn: ${xTurn?'X':'O'}`;
+    }
+    function winner(b){
+      for (const [a,c,d] of wins){
+        if (b[a] && b[a]===b[c] && b[a]===b[d]) return b[a];
+      }
+      return null;
+    }
+    function move(i){
+      if (board[i] || winner(board)) return;
+      board[i] = xTurn ? 'X' : 'O';
+      xTurn = !xTurn;
+      render();
+    }
+    resetEl.onclick = ()=>{ board = Array(9).fill(null); xTurn = true; render(); };
+    render();
+  </script>
+</body>
+</html>

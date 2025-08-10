@@ -1,0 +1,75 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Rocco Craven — Home</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Rocco's site — blog, minigames, ideas.">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html">Rocco Craven</a>
+    <nav>
+      <a href="blog.html">Blog</a>
+      <a href="games/tictactoe.html">Tic-Tac-Toe</a>
+      <a href="games/snake.html">Snake</a>
+      <a href="ideas.html">Ideas</a>
+      <a class="cta" href="https://github.com/roccocraven" target="_blank" rel="noopener">GitHub</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <h1>Make, play, share.</h1>
+      <p>Quick thoughts, small games, and experiments. Built to stay lightweight and grow with me.</p>
+    </section>
+
+    <section>
+      <h2>Latest posts</h2>
+      <div id="latest-posts" class="post-list"></div>
+      <p><a href="blog.html">See all posts →</a></p>
+    </section>
+
+    <section>
+      <h2>Play</h2>
+      <ul class="grid">
+        <li><a class="card" href="games/tictactoe.html"><h3>Tic-Tac-Toe</h3><p>Classic duel.</p></a></li>
+        <li><a class="card" href="games/snake.html"><h3>Snake</h3><p>Eat. Grow. Don’t crash.</p></a></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Ideas</h2>
+      <p>Sketches and seedlings live on the <a href="ideas.html">Ideas</a> page.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <small>© <span id="year"></span> Rocco Craven. Built on GitHub Pages.</small>
+  </footer>
+
+  <script src="assets/js/utils.js"></script>
+  <script>
+    // Load latest 3 posts
+    fetch('posts/index.json')
+      .then(r => r.json())
+      .then(posts => {
+        const latest = posts.slice(0,3);
+        const el = document.getElementById('latest-posts');
+        el.innerHTML = latest.map(p => `
+          <article class="post-card">
+            <a href="post.html?slug=${encodeURIComponent(p.slug)}">
+              <h3>${p.title}</h3>
+              <time>${p.date}</time>
+              <p>${p.summary}</p>
+            </a>
+          </article>
+        `).join('');
+      })
+      .catch(() => {
+        document.getElementById('latest-posts').innerHTML = '<p>Could not load posts.</p>';
+      });
+  </script>
+</body>
+</html>

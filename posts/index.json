@@ -1,0 +1,14 @@
+﻿[
+  {
+    "title": "Hello, world",
+    "date": "2025-08-10",
+    "slug": "hello-world",
+    "summary": "A quick hello and what this site aims to be."
+  },
+  {
+    "title": "Why I write",
+    "date": "2025-08-10",
+    "slug": "why-i-write",
+    "summary": "Notes on clarity, play, and learning in public."
+  }
+]

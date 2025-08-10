@@ -1,0 +1,66 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Snake — Rocco</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    canvas { background: var(--card); border: 1px solid var(--border); border-radius: 8px; display: block; margin: 20px 0; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="../index.html">Rocco Craven</a>
+    <nav>
+      <a href="../blog.html">Blog</a>
+      <a href="tictactoe.html">Tic-Tac-Toe</a>
+      <a class="active" href="#">Snake</a>
+    </nav>
+  </header>
+  <main class="container">
+    <h1>Snake</h1>
+    <canvas id="c" width="400" height="400"></canvas>
+    <p>Use arrow keys. Don’t hit the walls or yourself.</p>
+  </main>
+  <script>
+    const c = document.getElementById('c'), ctx = c.getContext('2d');
+    const size = 20, cells = c.width / size;
+    let snake = [{x:10,y:10}], dir = {x:1,y:0}, food = spawn(), alive = true, tick = 120, pending = [];
+    function spawn(){
+      return { x: Math.floor(Math.random()*cells), y: Math.floor(Math.random()*cells) };
+    }
+    function draw(){
+      ctx.clearRect(0,0,c.width,c.height);
+      ctx.strokeStyle = 'rgba(255,255,255,0.06)';
+      for (let i=0;i<cells;i++){ ctx.beginPath(); ctx.moveTo(i*size,0); ctx.lineTo(i*size,c.height); ctx.stroke(); }
+      for (let j=0;j<cells;j++){ ctx.beginPath(); ctx.moveTo(0,j*size); ctx.lineTo(c.width,j*size); ctx.stroke(); }
+      ctx.fillStyle = '#e34f4f';
+      ctx.fillRect(food.x*size, food.y*size, size, size);
+      ctx.fillStyle = '#58a6ff';
+      snake.forEach(s => ctx.fillRect(s.x*size, s.y*size, size, size));
+    }
+    function step(){
+      if (!alive) return;
+      const next = pending.shift() || dir;
+      dir = next;
+      const head = { x: (snake[0].x + dir.x), y: (snake[0].y + dir.y) };
+      if (head.x<0 || head.y<0 || head.x>=cells || head.y>=cells || snake.some(s=>s.x===head.x && s.y===head.y)){
+        alive = false; alert('Game over'); return;
+      }
+      snake.unshift(head);
+      if (head.x===food.x && head.y===food.y){ food = spawn(); } else { snake.pop(); }
+      draw();
+      setTimeout(step, tick);
+    }
+    addEventListener('keydown', e=>{
+      const k = e.key;
+      const d = (k==='ArrowUp')?{x:0,y:-1}:(k==='ArrowDown')?{x:0,y:1}:(k==='ArrowLeft')?{x:-1,y:0}:(k==='ArrowRight')?{x:1,y:0}:null;
+      if (!d) return;
+      if (snake.length>1 && (d.x===-dir.x && d.y===-dir.y)) return;
+      pending.push(d);
+    });
+    draw(); step();
+  </script>
+</body>
+</html>
